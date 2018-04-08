@@ -4,6 +4,15 @@ import '../game/game.dart';
 
 /// A scene in a Zenith game. Only one scene will be running at a time.
 abstract class Scene {
+  /// The parameters passed to this scene.
+  var params;
+
+  /// Use this method to handle parameters passed to this scene.
+  @mustCallSuper
+  Future init(Game game, params) async {
+    this.params = params;
+  }
+
   /// Use this method to declare assets that should be loaded before [create] is called.
   @mustCallSuper
   Future load(Game game) => game.assetLoader.loadAllAssets().value;
