@@ -5,4 +5,4 @@ targets:
         # These are globs for the entrypoints you want to compile.
         generate_for:
         - web/**/main.dart
-        - web/main.dart
+        #- web/main.dart

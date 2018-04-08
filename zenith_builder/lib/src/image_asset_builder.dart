@@ -6,9 +6,6 @@ import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
 
-/// [ImageAssetBuilder] factory.
-Builder imageAssetBuilder(_) => const ImageAssetBuilder();
-
 /// Generates an `Asset<Image>` that loads the contents of the given file from an in-memory array, rather than XHR.
 class ImageAssetBuilder implements Builder {
   const ImageAssetBuilder();
