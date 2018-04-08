@@ -5,3 +5,5 @@ dependencies:
     path: ../zenith
   zenith_builder:
     path: ../zenith_builder
+  zenith_html:
+    path: ../zenith_html
