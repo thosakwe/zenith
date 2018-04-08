@@ -1,0 +1,7 @@
+name: example
+dependencies:
+  build_runner:
+  zenith:
+    path: ../
+  zenith_generator:
+    path: ../
