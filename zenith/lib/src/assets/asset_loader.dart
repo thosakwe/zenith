@@ -9,13 +9,13 @@ abstract class AssetLoader {
   final List<Asset> assets = [];
 
   /// Loads a byte array.
-  CancelableOperation<List<int>> loadBytes();
+  CancelableOperation<List<int>> loadBytes(String url);
 
   /// Loads a string.
-  CancelableOperation<String> loadString();
+  CancelableOperation<String> loadString(String url);
 
   /// Loads a JSON document.
-  CancelableOperation<T> loadJSON<T>();
+  CancelableOperation<T> loadJSON<T>(String url);
 
   /// Loads all assets asynchronously. Can be cancelled.
   CancelableOperation loadAllAssets() {
