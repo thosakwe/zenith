@@ -1,0 +1,23 @@
+targets:
+  $default: {}
+builders:
+  zenith:
+    target: "zenith_builder"
+    auto_apply: root_package
+    build_extensions:
+      .png:
+        - ".png.asset.dart"
+      .jpg:
+        - ".jpg.asset.dart"
+      .jpeg:
+        - ".jpeg.asset.dart"
+      .tiff:
+        - ".tiff.asset.dart"
+      .tga:
+        - ".tga.asset.dart"
+      .psd:
+        - ".psd.asset.dart"
+      .webp:
+        - ".webp.asset.dart"
+      .gif:
+        - ".gif.asset.dart"

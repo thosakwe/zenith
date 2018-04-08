@@ -18,14 +18,14 @@ class ImageAssetBuilder implements Builder {
   @override
   Map<String, List<String>> get buildExtensions {
     return {
-      '.png': [extension],
-      '.jpg': [extension],
-      '.jpeg': [extension],
-      '.tiff': [extension],
-      '.psd': [extension],
-      '.tga': [extension],
-      '.webp': [extension],
-      '.gif': [extension],
+      '.png': ['.png' + extension],
+      '.jpg': ['.jpg' + extension],
+      '.jpeg': ['.jpeg' + extension],
+      '.tiff': ['.tiff' + extension],
+      '.psd': ['.psd' + extension],
+      '.tga': ['.tga' + extension],
+      '.webp': ['.webp' + extension],
+      '.gif': ['.gif' + extension],
     };
   }
 
@@ -83,6 +83,8 @@ class ImageAssetBuilder implements Builder {
     var buf = lib.accept(new DartEmitter());
     var formatted = new DartFormatter().format(buf.toString());
     buildStep.writeAsString(
-        buildStep.inputId.changeExtension(extension), formatted);
+        buildStep.inputId
+            .changeExtension(buildStep.inputId.extension + extension),
+        formatted);
   }
 }
