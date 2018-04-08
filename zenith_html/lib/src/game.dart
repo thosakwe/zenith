@@ -26,6 +26,7 @@ class HtmlGame extends Game {
   HtmlGame(this.canvas, {this.debug: false}) {
     _sceneManager = new HtmlSceneManager(this);
     _timer = new GameTimerImpl();
+    _world = new WebGLWorld(canvas, this);
   }
 
   @override

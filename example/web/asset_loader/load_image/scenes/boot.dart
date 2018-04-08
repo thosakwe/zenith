@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:image/image.dart';
+import 'package:vector_math/vector_math.dart';
 import 'package:zenith/zenith.dart';
 import '../../../assets/dart-logo.png.asset.dart';
 
@@ -30,6 +31,12 @@ class BootScene extends Scene {
     var xhrDartLogo = xhrDartLogoAsset.value;
     print('XHR Dart Logo dimensions: ${xhrDartLogo.width}x${xhrDartLogo.height}');
 
+    game.world.clear(Colors.cornflowerBlue);
     return super.create(game);
+  }
+
+  @override
+  Future update(Game game) async {
+    await super.update(game);
   }
 }
