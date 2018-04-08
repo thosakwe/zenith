@@ -1,5 +1,14 @@
 targets:
-  image_asset: {}
+  image_asset:
+    sources:
+        - "*.png"
+        - "*.jpg"
+        - "*.jpeg"
+        - "*.tiff"
+        - "*.tga"
+        - "*.psd"
+        - "*.webp"
+        - "*.gif"
   $default: {}
 builders:
   image_asset:
