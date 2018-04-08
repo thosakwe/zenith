@@ -1,7 +1,7 @@
 import 'package:zenith/zenith.dart';
 import 'scenes/boot.dart';
 
-main() {
+void main() {
   Game game;
   game.sceneManager.run(bootScene);
 }
