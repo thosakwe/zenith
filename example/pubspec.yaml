@@ -1,7 +1,7 @@
 name: example
 dependencies:
-  build_runner:
+  build_runner: ^0.8.2
   zenith:
-    path: ../
-  zenith_generator:
-    path: ../
+    path: ../zenith
+  zenith_builder:
+    path: ../zenith_builder

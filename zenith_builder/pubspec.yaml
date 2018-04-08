@@ -1,4 +1,4 @@
-name: zenith_build
+name: zenith_builder
 environment:
   sdk: ">=2.0.0-dev <=2.0.0"
 dependencies:

@@ -36,6 +36,12 @@ class ImageAssetBuilder implements Builder {
     suffix = suffix[0].toUpperCase() + suffix.substring(1);
 
     var lib = new Library((b) {
+      var className =
+          new ReCase(p.basenameWithoutExtension(buildStep.inputId.path))
+                  .pascalCase +
+              'Asset';
+      var rc = new ReCase(className);
+
       b.directives.addAll([
         new Directive.import('dart:async'),
         new Directive.import('package:async/async.dart'),
@@ -43,20 +49,20 @@ class ImageAssetBuilder implements Builder {
         new Directive.import('package:zenith/zenith.dart'),
       ]);
 
-      b.body.add(new Code('// GENERATED CODE. Do not modify by hand.'));
+      b.body.add(
+          new Code('/// Asset generated from ${buildStep.inputId.uri}.\n'));
+
+      b.body.add(
+          new Code('final Asset<Image> ${rc.camelCase} = new _$className();'));
 
       b.body.add(new Class((b) {
-        b.name = new ReCase(p.basenameWithoutExtension(buildStep.inputId.path))
-                .pascalCase +
-            'Asset';
+        b.name = '_' + className;
 
-        b.implements.add(new TypeReference((b) {
+        b.extend = new TypeReference((b) {
           b
             ..symbol = 'Asset'
             ..types.add(new Reference('Image'));
-        }));
-
-        b.constructors.add(new Constructor((b) => b..constant = true));
+        });
 
         b.methods.add(new Method((b) {
           b
@@ -81,7 +87,8 @@ class ImageAssetBuilder implements Builder {
     });
 
     var buf = lib.accept(new DartEmitter());
-    var formatted = new DartFormatter().format(buf.toString());
+    var formatted = '// GENERATED CODE. Do not modify by hand.\n\n' +
+        new DartFormatter().format(buf.toString());
     buildStep.writeAsString(
         buildStep.inputId
             .changeExtension(buildStep.inputId.extension + extension),

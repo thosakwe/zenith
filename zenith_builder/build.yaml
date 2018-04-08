@@ -1,9 +1,13 @@
 targets:
+  image_asset: {}
   $default: {}
 builders:
-  zenith:
-    target: "zenith_builder"
+  image_asset:
+    target: "zenith_builder|image_asset"
     auto_apply: root_package
+    import: "package:zenith_builder/zenith_builder.dart"
+    builder_factories:
+      - imageAssetBuilder
     build_extensions:
       .png:
         - ".png.asset.dart"
