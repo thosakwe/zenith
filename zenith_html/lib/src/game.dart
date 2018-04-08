@@ -49,7 +49,4 @@ class HtmlGame extends Game {
   Future close() async {
     await _timer.close();
   }
-
-  /// Draws the current game contents.
-  void render() {}
 }

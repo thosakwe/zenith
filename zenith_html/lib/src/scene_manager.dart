@@ -46,7 +46,7 @@ class HtmlSceneManager extends SceneManager {
       _timerListener = game.timer.loop(() async {
         await scene.update(game);
         if (game.debug) await scene.debug(game);
-        game.render();
+        game.world.render();
       }, const Duration(milliseconds: 1000 ~/ 60));
     });
   }

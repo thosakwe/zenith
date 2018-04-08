@@ -6,6 +6,15 @@ abstract class World {
   /// Clears the display, and fills the canvas with the [color].
   void clear(Vector4 color);
 
+  /// Normalizes an [x] coordinate within the aspect ratio of the game.
+  double normalizeX(double x);
+
+  /// Normalizes a [y] coordinate within the aspect ratio of the game.
+  double normalizeY(double y);
+
+  /// Normalizes a [z] coordinate within the aspect ratio of the game.
+  double normalizeZ(double z);
+
   /// Creates a new [Cube].
   Cube createCube(Vector3 position, Vector3 size, Vector4 color);
 

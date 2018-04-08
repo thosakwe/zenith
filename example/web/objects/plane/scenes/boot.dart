@@ -1,42 +1,30 @@
 import 'dart:async';
-import 'package:image/image.dart';
 import 'package:vector_math/vector_math.dart';
 import 'package:zenith/zenith.dart';
-import '../../../assets/dart-logo.png.asset.dart';
 
 final BootScene bootScene = new BootScene._();
 
 class BootScene extends Scene {
-  Asset<Image> xhrDartLogoAsset;
-
   BootScene._();
 
   @override
   Future load(Game game) {
-    // We can use the auto-generated asset from 'dart-logo.png.asset.dart' for better speed.
-    game.assetLoader.assets.add(dartLogoAsset);
-
-    // However, we can also load from XHR.
-    xhrDartLogoAsset = Asset.image('../../assets/dart-logo.png');
-    game.assetLoader.assets.add(xhrDartLogoAsset);
-
+    game.world.createPlane(
+      new Vector3.zero(),
+      new Vector3.all(100.0),
+      Colors.purple,
+    );
     return super.load(game);
   }
 
   @override
   Future create(Game game) {
-    var dartLogo = dartLogoAsset.value;
-    print('Pre-compiled Dart Logo dimensions: ${dartLogo.width}x${dartLogo.height}');
-
-    var xhrDartLogo = xhrDartLogoAsset.value;
-    print('XHR Dart Logo dimensions: ${xhrDartLogo.width}x${xhrDartLogo.height}');
-
-    game.world.clear(Colors.cornflowerBlue);
     return super.create(game);
   }
 
   @override
   Future update(Game game) async {
     await super.update(game);
+    game.world.clear(Colors.pink);
   }
 }

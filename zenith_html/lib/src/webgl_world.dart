@@ -10,20 +10,44 @@ import 'game.dart';
 class WebGLWorld extends World {
   final CanvasElement canvas;
   final HtmlGame game;
+  Program program;
   Vector3 size;
 
   final List<Drawable> _objects = [];
-  RenderingContext _context;
+  RenderingContext context;
 
   WebGLWorld(this.canvas, this.game) {
-    _context = canvas.getContext3d();
+    context = canvas.getContext3d();
     size = new Vector3(canvas.width.toDouble(), canvas.height.toDouble(),
         canvas.width.toDouble());
+    program = context.createProgram();
+  }
+
+  /// Draws the current game contents.
+  void render() {
+    for (var obj in _objects) {
+      obj.draw(game, this);
+    }
+  }
+
+  @override
+  double normalizeX(double x) {
+    return x / size.x;
+  }
+
+  @override
+  double normalizeY(double y) {
+    return y / size.y;
+  }
+
+  @override
+  double normalizeZ(double z) {
+    return z / size.z;
   }
 
   @override
   void clear(Vector4 color) {
-    _context
+    context
       ..clearColor(color.r, color.g, color.b, color.a)
       ..clear(COLOR_BUFFER_BIT);
   }
@@ -41,6 +65,4 @@ class WebGLWorld extends World {
     _objects.add(plane);
     return plane;
   }
-
-
 }
