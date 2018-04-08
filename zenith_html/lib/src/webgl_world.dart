@@ -34,4 +34,13 @@ class WebGLWorld extends World {
     _objects.add(cube);
     return cube;
   }
+
+  @override
+  Plane2D createPlane(Vector3 position, Vector3 size, Vector4 color) {
+    var plane = new WebGLPlane(game, position, size, color);
+    _objects.add(plane);
+    return plane;
+  }
+
+
 }
