@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:async/async.dart';
+import 'package:image/image.dart';
 import 'asset_loader.dart';
+import 'image_asset.dart';
 
 /// A piece of data produced by an expensive computation.
 /// 
@@ -8,6 +10,9 @@ import 'asset_loader.dart';
 /// that the computation only is ever run once.
 abstract class Asset<T> {
   T _value;
+
+  /// Creates an [Asset] that asynchronously loads an [Image].
+  static Asset<Image> image(String url) => new ImageAsset(url);
 
   /// The current value of this asset.
   ///
