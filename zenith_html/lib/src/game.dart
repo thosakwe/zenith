@@ -1,9 +1,13 @@
 import 'dart:html' show document, window, CanvasElement, CanvasRenderingContext;
 import 'dart:web_gl';
 import 'package:zenith/zenith.dart';
+import 'xhr_asset_loader.dart';
 
 /// A [Game] implementation that runs in the browser.
 class HtmlGame extends Game {
+  @override
+  final AssetLoader assetLoader = new XHRAssetLoader();
+
   final CanvasElement canvas;
 
   HtmlGame(this.canvas);
