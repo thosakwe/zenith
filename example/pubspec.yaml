@@ -1,9 +1,11 @@
 name: example
 dependencies:
-  build_runner: ^0.8.2
   zenith:
     path: ../zenith
-  zenith_builder:
-    path: ../zenith_builder
   zenith_html:
     path: ../zenith_html
+dev_dependencies:
+  build_runner: ^0.8.2
+  build_web_compilers: ^0.3.6
+  zenith_builder:
+    path: ../zenith_builder
