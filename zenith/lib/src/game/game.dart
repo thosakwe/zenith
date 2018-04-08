@@ -1,6 +1,7 @@
 import '../assets/assets.dart';
 import '../time/time.dart';
 import 'scene_manager.dart';
+import 'world.dart';
 
 /// A game powered by the Zenith engine.
 abstract class Game {
@@ -12,4 +13,7 @@ abstract class Game {
 
   /// The mechanism responsible for handling and querying time.
   GameTimer get timer;
+
+  /// The mechanism responsible for drawing objects to the screen.
+  World get world;
 }
