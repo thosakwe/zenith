@@ -1,0 +1,7 @@
+name: zenith_generator
+environment:
+  sdk: ">=2.0.0-dev <=2.0.0"
+dependencies:
+  build_config:
+  code_builder: ^3.0.0
+  image: ^1.0.0
