@@ -9,6 +9,11 @@ import 'asset_loader.dart';
 abstract class Asset<T> {
   T _value;
 
+  /// The current value of this asset.
+  ///
+  /// This will be `null` if [load] has not been called.
+  T get value => _value;
+
   /// Gets the value of this asset, either through computation or a memoized value.
   CancelableOperation<T> load(AssetLoader loader) {
     if (_value != null) {
