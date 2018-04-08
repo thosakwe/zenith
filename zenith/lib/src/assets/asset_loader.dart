@@ -1,13 +1,13 @@
-import 'dart:async';
+import 'package:async/async.dart';
 
 /// An interface for asynchronously loading assets.
 abstract class AssetLoader {
   /// Loads a byte array.
-  Future<List<int>> loadBytes();
+  CancelableOperation<List<int>> loadBytes();
 
   /// Loads a string.
-  Future<String> loadString();
+  CancelableOperation<String> loadString();
 
   /// Loads a JSON document.
-  Future<T> loadJSON<T>();
+  CancelableOperation<T> loadJSON<T>();
 }
