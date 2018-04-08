@@ -1,12 +1,16 @@
 import 'dart:html' show document, window, CanvasElement, CanvasRenderingContext;
 import 'dart:web_gl';
 import 'package:zenith/zenith.dart';
+import 'timer.dart';
 import 'xhr_asset_loader.dart';
 
 /// A [Game] implementation that runs in the browser.
 class HtmlGame extends Game {
   @override
   final AssetLoader assetLoader = new XHRAssetLoader();
+
+  @override
+  final GameTimer timer = new GameTimerImpl();
 
   final CanvasElement canvas;
 
