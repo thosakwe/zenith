@@ -8,6 +8,7 @@ import 'game.dart';
 class HtmlSceneManager extends SceneManager {
   final HtmlGame game;
   Scene _scene;
+  bool _started = false;
   CancelableOperation _timerListener;
 
   HtmlSceneManager(this.game);
@@ -26,9 +27,17 @@ class HtmlSceneManager extends SceneManager {
           });
 
     dispose.then((_) async {
+      if (!_started) {
+        _started = true;
+        game.timer.start();
+      }
+
       _scene = scene;
       // Initialize the new scene
       await scene.init(game, params);
+
+      // Next, load the scene's assets.
+      await scene.load(game);
 
       // Now, we just need to start the scene.
       await scene.create(game);

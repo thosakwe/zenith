@@ -33,7 +33,7 @@ class XHRAssetLoader extends AssetLoader {
   @override
   CancelableOperation<T> loadJSON<T>(String url) {
     var xhr = _xhr(url, 'json');
-    var c = new CancelableCompleter(onCancel: xhr.cancel);
+    var c = new CancelableCompleter<T>(onCancel: xhr.cancel);
     c.complete(xhr.value.then((xhr) => xhr.response));
     return c.operation;
   }
@@ -41,7 +41,7 @@ class XHRAssetLoader extends AssetLoader {
   @override
   CancelableOperation<String> loadString(String url) {
     var xhr = _xhr(url, 'text');
-    var c = new CancelableCompleter(onCancel: xhr.cancel);
+    var c = new CancelableCompleter<String>(onCancel: xhr.cancel);
     c.complete(xhr.value.then((xhr) => xhr.responseText));
     return c.operation;
   }
@@ -49,7 +49,7 @@ class XHRAssetLoader extends AssetLoader {
   @override
   CancelableOperation<List<int>> loadBytes(String url) {
     var xhr = _xhr(url, 'blob');
-    var c = new CancelableCompleter(onCancel: xhr.cancel);
+    var c = new CancelableCompleter<List<int>>(onCancel: xhr.cancel);
     c.complete(xhr.value.then((xhr) {
       if (!c.isCanceled) {
         var cc = new Completer<List<int>>();

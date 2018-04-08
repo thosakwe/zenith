@@ -13,4 +13,7 @@ abstract class GameTimer {
   /// Continuously runs an operation, with a given [delay] between consecutive runs.
   CancelableOperation<T> loop<T>(FutureOr<T> callback(),
       [Duration delay = Duration.zero]);
+
+  /// Starts the timer.
+  void start();
 }

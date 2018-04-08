@@ -12,7 +12,7 @@ class ImageAsset extends Asset<Image> {
   @override
   CancelableOperation<Image> loadFresh(AssetLoader loader) {
     var op = loader.loadBytes(url);
-    var c = new CancelableCompleter(onCancel: op.cancel);
+    var c = new CancelableCompleter<Image>(onCancel: op.cancel);
     c.complete(op.value.then(decodeImage));
     return c.operation;
   }

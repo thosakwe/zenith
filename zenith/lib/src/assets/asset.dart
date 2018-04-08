@@ -5,7 +5,7 @@ import 'asset_loader.dart';
 import 'image_asset.dart';
 
 /// A piece of data produced by an expensive computation.
-/// 
+///
 /// Internally, this class performs memoization to ensure
 /// that the computation only is ever run once.
 abstract class Asset<T> {
@@ -25,7 +25,12 @@ abstract class Asset<T> {
       return new CancelableOperation.fromFuture(new Future.value(_value));
     }
 
-    return loadFresh(loader);
+    var fresh = loadFresh(loader);
+    var c = new CancelableCompleter<T>(onCancel: fresh.cancel);
+    c.complete(fresh.value.then((value) {
+      _value = value;
+    }));
+    return c.operation;
   }
 
   /// Loads the value. This is the function called by the memoizer.

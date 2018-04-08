@@ -9,9 +9,12 @@ class GameTimerImpl extends GameTimer {
   final Queue<_TimerEvent> _events = new Queue();
   Timer _timer;
 
-  GameTimerImpl() {
-    _timer =
-        new Timer.periodic(const Duration(milliseconds: 1), _timerCallback);
+  GameTimerImpl();
+
+  @override
+  void start() {
+    _timer ??=
+    new Timer.periodic(const Duration(milliseconds: 1), _timerCallback);
   }
 
   @override

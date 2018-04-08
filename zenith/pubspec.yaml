@@ -1,5 +1,5 @@
 name: zenith
 dependencies:
-  async: ^1.0.0
+  async: ^2.0.0
   image: ^1.0.0
   meta: ^1.0.0

@@ -24,7 +24,7 @@ abstract class AssetLoader {
 
     scheduleMicrotask(() async {
       while (queue.isNotEmpty && !completer.isCanceled) {
-        await queue.removeFirst().load(this);
+        await queue.removeFirst().load(this).value;
       }
 
       if (!completer.isCanceled) completer.complete();
