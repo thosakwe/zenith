@@ -5,6 +5,7 @@ builders:
   image_asset:
     target: "zenith_builder|image_asset"
     auto_apply: root_package
+    build_to: source
     import: "package:zenith_builder/zenith_builder.dart"
     builder_factories:
       - imageAssetBuilder

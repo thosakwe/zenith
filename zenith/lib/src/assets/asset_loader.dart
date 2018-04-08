@@ -1,19 +1,12 @@
 import 'dart:async';
 import 'dart:collection';
 import 'package:async/async.dart';
-import 'package:image/image.dart';
 import 'asset.dart';
 
 /// An interface for asynchronously loading assets.
 abstract class AssetLoader {
-  /// A [Map] of miscellaneous assets to be loaded.
-  ///
-  /// Prefer using one of the typed alternatives:
-  /// * [images]
-  final Map<String, Asset> assets = {};
-
-  /// A [Map] of images to be loaded.
-  final Map<String, Asset<Image>> images = {};
+  /// A [List] of images to be loaded.
+  final List<Asset> assets = [];
 
   /// Loads a byte array.
   CancelableOperation<List<int>> loadBytes();
@@ -27,9 +20,7 @@ abstract class AssetLoader {
   /// Loads all assets asynchronously. Can be cancelled.
   CancelableOperation loadAllAssets() {
     var completer = new CancelableCompleter();
-    var queue = new Queue<Asset>()
-      ..addAll(assets.values)
-      ..addAll(images.values);
+    var queue = new Queue<Asset>.from(assets);
 
     scheduleMicrotask(() async {
       while (queue.isNotEmpty && !completer.isCanceled) {
