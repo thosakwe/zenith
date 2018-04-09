@@ -24,18 +24,6 @@ class BootScene extends z.Scene {
   Future update(z.Game game) async {
     await super.update(game);
     game.world.clear(Colors.black);
-
-    if (add) {
-      plane.position.x++;
-
-      if (plane.position.x > game.world.size.x / 2)
-        add = false;
-    }
-    else if (add) {
-      plane.position.x--;
-
-      if (plane.position.x < 0)
-        add = true;
-    }
+    plane.transform.rotate = new Vector3(0.0, 0.0, 1 / 90);
   }
 }

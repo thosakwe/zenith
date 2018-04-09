@@ -70,7 +70,12 @@ class WebGLWorld extends World {
 
   @override
   Plane createPlane(Vector3 position, Vector3 size, Vector4 color) {
-    var plane = new WebGLPlane(game, position, size, color);
+    var plane = new WebGLPlane(
+      game,
+      new Matrix4.identity()..transform3(position),
+      new Matrix4.zero()..transform3(size),
+      color,
+    );
     _objects.add(plane);
     return plane;
   }

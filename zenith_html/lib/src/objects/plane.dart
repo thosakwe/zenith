@@ -10,12 +10,14 @@ import 'webgl_draw.dart';
 
 class WebGLPlane extends Plane {
   final HtmlGame _game;
+  final Vector4 color;
 
-  WebGLPlane(this._game, Vector3 position, Vector3 size, Vector4 color)
-      : super(position, size, color);
+  WebGLPlane(this._game, Matrix4 position, Matrix4 originalSize, this.color)
+      : super(position, originalSize);
 
   @override
   void draw(Game game, World world) {
+    super.draw(game, world);
     var positions = <double>[];
     var colors = new List<double>(4);
     color.copyIntoArray(colors);
@@ -67,9 +69,8 @@ class WebGLPlane extends Plane {
 
     var indices = [0, 1, 2, 0, 2, 3];
 
-    var modelView = new Matrix4.identity();
+    var modelView = position.clone();
     modelView.translate(-0.0, 0.0, -6.0);
-    modelView.translate(translate);
 
     webGLDraw(
       gl,
