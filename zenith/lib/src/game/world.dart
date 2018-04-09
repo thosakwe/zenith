@@ -21,10 +21,8 @@ abstract class World {
   /// Normalizes a [z] coordinate within the aspect ratio of the game.
   double normalizeZ(double z);
 
-  /// Creates a new [Cube].
-  Cube createCube(Vector3 position, Vector3 size, Vector4 color);
-
-  Plane2D createPlane(Vector3 position, Vector3 size, Vector4 color);
+  /// Creates a new [Plane].
+  Plane createPlane(Vector3 position, Vector3 size, Vector4 color);
 }
 
 /// A mechanism for controlling the game's field of view.

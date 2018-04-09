@@ -6,28 +6,26 @@ import '../game/world.dart';
 /// An object that can be drawn to the screen.
 abstract class Drawable {
   /// The position of this object.
-  Vector3 position;
+  Vector3 get position;
+
+  /// The size of this object.
+  Vector3 get size;
+
+  /// The scale of this object.
+  Vector3 get scale;
 
   /// Draws this object to the screen.
   void draw(Game game, World world);
 }
 
-/// A [Drawable] with an expressed size.
-abstract class SizedDrawable extends Drawable {
-  /// The size of this object.
-  Vector3 size;
+/// A wrapper for object transformations.
+abstract class Transform {
+  /// The translation vector to apply during this frame.
+  Vector3 get translate;
 
-  @override
-  Vector3 position;
+  /// The rotation vector to apply during this frame.
+  Vector3 get rotate;
 
-  SizedDrawable(this.position, this.size);
-}
-
-/// A [SizedDrawable] with a uniform color.
-abstract class MonochromeDrawable extends SizedDrawable {
-  /// The color of this object.
-  Vector4 color;
-
-  MonochromeDrawable(Vector3 position, Vector3 size, this.color)
-      : super(position, size);
+  /// The scale vector to apply during this frame.
+  Vector3 get scale;
 }

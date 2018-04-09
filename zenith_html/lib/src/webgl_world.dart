@@ -1,7 +1,7 @@
-import 'dart:html' show CanvasElement, RenderingContext;
+import 'dart:html' show CanvasElement;
 import 'dart:web_gl';
 
-import 'package:vector_math/vector_math.dart';
+import 'package:vector_math/vector_math.dart' hide Plane;
 import 'package:zenith/zenith.dart';
 import 'objects/objects.dart';
 import 'game.dart';
@@ -10,17 +10,25 @@ import 'game.dart';
 class WebGLWorld extends World {
   final CanvasElement canvas;
   final HtmlGame game;
-  Program _program;
+
+  @override
   Vector3 size;
+
+  _WebGLPerspectiveCamera _camera;
+  Program _program;
 
   final List<Drawable> _objects = [];
   RenderingContext context;
 
   WebGLWorld(this.canvas, this.game) {
+    _camera = new _WebGLPerspectiveCamera(this);
     context = canvas.getContext3d();
     size = new Vector3(canvas.width.toDouble(), canvas.height.toDouble(),
         canvas.width.toDouble());
   }
+
+  @override
+  Camera get camera => _camera;
 
   /// The WebGL [Program] for this frame.
   Program get program => _program;
@@ -61,16 +69,18 @@ class WebGLWorld extends World {
   }
 
   @override
-  Cube createCube(Vector3 position, Vector3 size, Vector4 color) {
-    var cube = new WebGLCube(game, position, size, color);
-    _objects.add(cube);
-    return cube;
-  }
-
-  @override
-  Plane2D createPlane(Vector3 position, Vector3 size, Vector4 color) {
+  Plane createPlane(Vector3 position, Vector3 size, Vector4 color) {
     var plane = new WebGLPlane(game, position, size, color);
     _objects.add(plane);
     return plane;
   }
+}
+
+class _WebGLPerspectiveCamera extends PerspectiveCamera {
+  final WebGLWorld world;
+
+  _WebGLPerspectiveCamera(this.world) : super();
+
+  @override
+  num get aspectRatio => world.canvas.clientWidth / world.canvas.clientHeight;
 }

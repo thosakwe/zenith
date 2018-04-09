@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'dart:html' show document, window, CanvasElement, CanvasRenderingContext;
-import 'dart:web_gl';
+import 'dart:html' show document, CanvasElement;
 import 'package:zenith/zenith.dart';
 import 'scene_manager.dart';
 import 'timer.dart';

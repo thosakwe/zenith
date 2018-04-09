@@ -1,14 +1,14 @@
 import 'dart:math';
 import 'dart:web_gl';
 import 'dart:typed_data';
-import 'package:vector_math/vector_math.dart';
+import 'package:vector_math/vector_math.dart' hide Plane;
 import 'package:zenith/zenith.dart';
 import '../game.dart';
 import 'plane.fragment.glsl.dart';
 import 'plane.vertex.glsl.dart';
 import 'webgl_draw.dart';
 
-class WebGLPlane extends Plane2D {
+class WebGLPlane extends Plane {
   final HtmlGame _game;
 
   WebGLPlane(this._game, Vector3 position, Vector3 size, Vector4 color)
@@ -69,6 +69,7 @@ class WebGLPlane extends Plane2D {
 
     var modelView = new Matrix4.identity();
     modelView.translate(-0.0, 0.0, -6.0);
+    modelView.translate(translate);
 
     webGLDraw(
       gl,
@@ -85,7 +86,7 @@ class WebGLPlane extends Plane2D {
       drawType: TRIANGLE_STRIP,
       vertexCount: 4,
       uniformLocations: {
-        planeVertexShader.uProjectionMatrix: projection,
+        planeVertexShader.uProjectionMatrix: world.camera.matrix,
         planeVertexShader.uModelViewMatrix: modelView,
       },
     );
