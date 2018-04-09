@@ -3,6 +3,7 @@ environment:
   sdk: ">=2.0.0-dev <=2.0.0"
 dependencies:
   c_builder: ^1.0.0
+  tuple: ^1.0.0
   zenith:
     path: ../zenith
 dev_dependencies:

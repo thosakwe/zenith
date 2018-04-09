@@ -8,23 +8,18 @@ class BootScene extends Scene {
   BootScene._();
 
   @override
-  Future load(Game game) {
+  Future create(Game game) {
     game.world.createPlane(
       new Vector3.zero(),
       new Vector3.all(100.0),
-      Colors.purple,
+      Colors.fuchsia,
     );
-    return super.load(game);
-  }
-
-  @override
-  Future create(Game game) {
     return super.create(game);
   }
 
   @override
   Future update(Game game) async {
     await super.update(game);
-    game.world.clear(Colors.pink);
+    game.world.clear(Colors.black);
   }
 }

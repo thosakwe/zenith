@@ -27,6 +27,7 @@ class WebGLWorld extends World {
 
   /// Draws the current game contents.
   void render() {
+    context.viewport(0, 0, canvas.width, canvas.height);
     _program = context.createProgram();
 
     for (var obj in _objects) {
@@ -53,7 +54,10 @@ class WebGLWorld extends World {
   void clear(Vector4 color) {
     context
       ..clearColor(color.r, color.g, color.b, color.a)
-      ..clear(COLOR_BUFFER_BIT);
+      ..clear(COLOR_BUFFER_BIT | DEPTH_BUFFER_BIT)
+      ..clearDepth(1.0)
+      ..enable(DEPTH_TEST)
+      ..depthFunc(LEQUAL);
   }
 
   @override

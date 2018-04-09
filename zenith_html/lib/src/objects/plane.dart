@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:web_gl';
 import 'dart:typed_data';
 import 'package:vector_math/vector_math.dart';
@@ -16,13 +17,13 @@ class WebGLPlane extends Plane2D {
   @override
   void draw(Game game, World world) {
     var positions = <double>[];
-    var world = _game.world;
+    var colors = new List<double>(4);
+    color.copyIntoArray(colors);
 
-    var colors = <double>[];
+    //for (int i = 0; i < 4; i++)
+    //  colors.addAll([color.r, color.g, color.b, color.a]);
 
-    for (int i = 0; i < 4; i++)
-      colors.addAll([color.r, color.g, color.b, color.a]);
-
+    /*
     // The coordinates..
     var topLeft = [
       world.normalizeX(position.x - (size.x / 2)),
@@ -52,7 +53,9 @@ class WebGLPlane extends Plane2D {
       ..addAll(topLeft)
       ..addAll(topRight)
       ..addAll(bottomLeft)
-      ..addAll(bottomRight);
+      ..addAll(bottomRight);*/
+
+    positions.addAll([1.0, 1.0, -1.0, 1.0, 1.0, -1.0, -1.0, -1.0]);
 
     var gl = _game.world.context;
     var program = _game.world.program;
@@ -60,23 +63,38 @@ class WebGLPlane extends Plane2D {
     /// Use handy pre-built shaders to save a major headache!!!
     planeVertexShader.compile(gl, program);
     planeFragmentShader.compile(gl, program);
-    gl..linkProgram(program)..useProgram(program);
+    gl..linkProgram(program);
 
     var indices = [0, 1, 2, 0, 2, 3];
+
+    var projection = new Matrix4.identity(),
+        modelView = new Matrix4.identity();
+    setPerspectiveMatrix(
+      projection,
+      45 * pi / 180,
+      gl.canvas.clientWidth / gl.canvas.clientHeight,
+      0.1,
+      100.0,
+    );
+    modelView.translate(-0.0, 0.0, -6.0);
 
     webGLDraw(
       gl,
       program,
       vertexAtttributes: {
-        planeVertexShader.aVertexPosition: 3,
-        planeVertexShader.aVertexColor: 4,
+        0: {
+          planeVertexShader.aVertexPosition: 2,
+          planeVertexShader.aVertexColor: 2,
+          //planeVertexShader.aVertexColor: 4,
+        },
       },
       arrayBuffers: [positions, colors],
-      elementArrayBuffer: indices,
-      drawType: TRIANGLES,
+      //elementArrayBuffer: indices,
+      drawType: TRIANGLE_STRIP,
+      vertexCount: 4,
       uniformLocations: {
-        planeVertexShader.uProjectionMatrix: new Matrix4.identity(),
-        planeVertexShader.uModelViewMatrix: new Matrix4.identity(),
+        planeVertexShader.uProjectionMatrix: projection,
+        planeVertexShader.uModelViewMatrix: modelView,
       },
     );
   }
