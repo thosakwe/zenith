@@ -19,11 +19,11 @@ class WebGLPlane extends Plane {
   void draw(Game game, World world) {
     super.draw(game, world);
     var positions = <double>[];
-    var colors = new List<double>(4);
-    color.copyIntoArray(colors);
+    var colors = <double>[];
+    //color.copyIntoArray(colors);
 
-    //for (int i = 0; i < 4; i++)
-    //  colors.addAll([color.r, color.g, color.b, color.a]);
+    for (int i = 0; i < 4; i++)
+      colors.addAll([color.r, color.g, color.b, color.a]);
 
     /*
     // The coordinates..
@@ -78,8 +78,10 @@ class WebGLPlane extends Plane {
       vertexAtttributes: {
         0: {
           planeVertexShader.aVertexPosition: 2,
-          planeVertexShader.aVertexColor: 2,
           //planeVertexShader.aVertexColor: 4,
+        },
+        1: {
+          planeVertexShader.aVertexColor: 4,
         },
       },
       arrayBuffers: [positions, colors],

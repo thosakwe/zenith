@@ -20,6 +20,9 @@ class GameTimerImpl extends GameTimer {
   @override
   int get elapsedMilliseconds => _timer.tick;
 
+  @override
+  int get elapsedTicks => elapsedSeconds ~/ 60;
+
   Future close() async {
     while (_events.isNotEmpty)
       _events.removeFirst().completer.completeError(
