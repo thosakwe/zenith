@@ -1,6 +1,4 @@
-import 'dart:math';
 import 'dart:web_gl';
-import 'dart:typed_data';
 import 'package:vector_math/vector_math.dart' hide Plane;
 import 'package:zenith/zenith.dart';
 import '../game.dart';

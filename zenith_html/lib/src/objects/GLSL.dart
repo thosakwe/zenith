@@ -33,11 +33,13 @@ class GLSL {
 
   /// Compiles this shader within the context of a [Program].
   void compile(RenderingContext context, Program program) {
-    _context = context;
-    _program = program;
-    _shader = context.createShader(shaderType);
-    context.shaderSource(_shader, source);
-    context.compileShader(_shader);
-    context.attachShader(program, _shader);
+    if (program != _program) {
+      _context = context;
+      _program = program;
+      _shader = context.createShader(shaderType);
+      context.shaderSource(_shader, source);
+      context.compileShader(_shader);
+      context.attachShader(program, _shader);
+    }
   }
 }
