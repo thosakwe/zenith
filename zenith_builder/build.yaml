@@ -18,6 +18,7 @@ builders:
     import: "package:zenith_builder/zenith_builder.dart"
     builder_factories:
       - imageAssetBuilder
+      - shaderBuilder
     build_extensions:
       .png:
         - ".png.asset.dart"
@@ -35,3 +36,7 @@ builders:
         - ".webp.asset.dart"
       .gif:
         - ".gif.asset.dart"
+      .fragment.glsl:
+        - ".fragment.glsl.dart"
+      .vertex.glsl:
+        - ".vertex.glsl.dart"
