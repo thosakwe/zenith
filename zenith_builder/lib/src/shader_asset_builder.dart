@@ -24,7 +24,7 @@ class ShaderBuilder implements Builder {
   @override
   Future build(BuildStep buildStep) async {
     var source = await buildStep.readAsString(buildStep.inputId);
-    bool isVertex = buildStep.inputId.extension == '.vertex.glsl';
+    bool isVertex = buildStep.inputId.path.endsWith('.vertex.glsl');
     var rc = new ReCase(p.basenameWithoutExtension(buildStep.inputId.uri.path));
 
     var lib = new Library((b) {
@@ -70,12 +70,14 @@ class ShaderBuilder implements Builder {
           var type = new Reference(isAttribute ? 'int' : 'UniformLocation');
           var doc = isAttribute ? 'attribute' : 'uniform';
 
+          /*
           // Create the private field.
           b.fields.add(new Field((b) {
             b
               ..name = '_' + fieldName
               ..type = type;
           }));
+          */
 
           // Now just add a getter.
           b.methods.add(new Method((b) {
@@ -86,7 +88,8 @@ class ShaderBuilder implements Builder {
               ..returns = type
               ..type = MethodType.getter
               ..body = new Code(
-                  "return _$fieldName ??= context.$locationMethod(program, '$name');");
+                  "return context.$locationMethod(program, '$name');");
+                  //"return _$fieldName ??= context.$locationMethod(program, '$name');");
           }));
         }
       }));

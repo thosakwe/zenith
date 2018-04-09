@@ -10,7 +10,7 @@ import 'game.dart';
 class WebGLWorld extends World {
   final CanvasElement canvas;
   final HtmlGame game;
-  Program program;
+  Program _program;
   Vector3 size;
 
   final List<Drawable> _objects = [];
@@ -20,11 +20,15 @@ class WebGLWorld extends World {
     context = canvas.getContext3d();
     size = new Vector3(canvas.width.toDouble(), canvas.height.toDouble(),
         canvas.width.toDouble());
-    program = context.createProgram();
   }
+
+  /// The WebGL [Program] for this frame.
+  Program get program => _program;
 
   /// Draws the current game contents.
   void render() {
+    _program = context.createProgram();
+
     for (var obj in _objects) {
       obj.draw(game, this);
     }
