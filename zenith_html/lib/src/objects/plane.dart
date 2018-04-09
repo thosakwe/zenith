@@ -67,15 +67,7 @@ class WebGLPlane extends Plane2D {
 
     var indices = [0, 1, 2, 0, 2, 3];
 
-    var projection = new Matrix4.identity(),
-        modelView = new Matrix4.identity();
-    setPerspectiveMatrix(
-      projection,
-      45 * pi / 180,
-      gl.canvas.clientWidth / gl.canvas.clientHeight,
-      0.1,
-      100.0,
-    );
+    var modelView = new Matrix4.identity();
     modelView.translate(-0.0, 0.0, -6.0);
 
     webGLDraw(
